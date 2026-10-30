@@ -4,7 +4,7 @@ class AppColors {
   AppColors._();
 
   static const Color background = Color(0xFFF6F8FA);
-  static const Color primary = Color(0xFF246BFD);
+  static const Color primary = Colors.pinkAccent;
   static const Color primaryLight = Color(0xFF5E93FF);
 
   static const Color card = Colors.white;
