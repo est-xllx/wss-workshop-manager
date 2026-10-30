@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../models/equipment_item.dart';
 import '../widgets/equipment_card.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_dimensions.dart';
 import '../utils/app_styles.dart';
+import 'detail_screen.dart';
 
 class CatalogScreen extends StatelessWidget {
   const CatalogScreen({super.key});
@@ -11,11 +13,13 @@ class CatalogScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final equipmentList = EquipmentItem.equipmentList;
+
     final availableCount =
         equipmentList.where((item) => item.isAvailable).length;
 
     return Scaffold(
       backgroundColor: AppColors.background,
+
       appBar: AppBar(
         title: const Text(
           'Workshop Equipment',
@@ -23,9 +27,11 @@ class CatalogScreen extends StatelessWidget {
         ),
         backgroundColor: AppColors.card,
       ),
+
       body: ListView(
         padding: const EdgeInsets.all(AppDimensions.lg),
         children: [
+          // Equipment Catalog Banner
           Container(
             padding: const EdgeInsets.all(AppDimensions.lg),
             decoration: BoxDecoration(
@@ -59,20 +65,28 @@ class CatalogScreen extends StatelessWidget {
               ],
             ),
           ),
+
           const SizedBox(height: AppDimensions.lg),
+
           const Text(
             'Available Equipment',
             style: AppStyles.sectionTitle,
           ),
+
           const SizedBox(height: AppDimensions.md),
+
+          // Equipment Cards
           ...equipmentList.map(
                 (equipment) => EquipmentCard(
               equipment: equipment,
+
+              // Open the selected equipment's detail screen
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      '${equipment.name} selected',
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailScreen(
+                      equipment: equipment,
                     ),
                   ),
                 );
