@@ -30,10 +30,12 @@ class _DetailScreenState extends State<DetailScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
+
       appBar: AppBar(
         title: const Text('Equipment Details'),
         backgroundColor: AppColors.card,
       ),
+
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppDimensions.lg),
         child: Center(
@@ -42,7 +44,8 @@ class _DetailScreenState extends State<DetailScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Equipment Information Card
+
+                // EQUIPMENT INFORMATION CARD
                 Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
@@ -67,7 +70,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           color: AppColors.primary,
                         ),
                       ),
+
                       const SizedBox(height: 16),
+
                       Text(
                         equipment.name,
                         textAlign: TextAlign.center,
@@ -76,7 +81,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+
                       const SizedBox(height: 4),
+
                       Text(
                         equipment.category,
                         style: const TextStyle(
@@ -84,7 +91,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           fontSize: 15,
                         ),
                       ),
+
                       const SizedBox(height: 12),
+
                       Text(
                         'S\$${equipment.hourlyRate.toStringAsFixed(2)} per hour',
                         style: const TextStyle(
@@ -99,7 +108,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
                 const SizedBox(height: 24),
 
-                // Rental Settings
+                // RENTAL SETTINGS CARD
                 Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
@@ -118,7 +127,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+
                       const SizedBox(height: 14),
+
                       CounterStepper(
                         value: rentalHours,
                         onChanged: (newValue) {
@@ -127,7 +138,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           });
                         },
                       ),
+
                       const SizedBox(height: 28),
+
                       Text(
                         'Power Level: ${powerLevel.round()}%',
                         style: const TextStyle(
@@ -135,6 +148,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+
                       Slider(
                         value: powerLevel,
                         min: 0,
@@ -148,7 +162,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           });
                         },
                       ),
+
                       const SizedBox(height: 16),
+
                       SwitchListTile(
                         contentPadding: EdgeInsets.zero,
                         title: const Text(
@@ -175,7 +191,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
                 const SizedBox(height: 24),
 
-                // Estimated Total
+                // ESTIMATED TOTAL CARD
                 Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
@@ -191,7 +207,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         'Estimated Total',
                         style: TextStyle(fontSize: 16),
                       ),
+
                       const SizedBox(height: 8),
+
                       Text(
                         'S\$${totalPrice.toStringAsFixed(2)}',
                         style: const TextStyle(
@@ -200,7 +218,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           color: AppColors.primary,
                         ),
                       ),
+
                       const SizedBox(height: 4),
+
                       Text(
                         '$rentalHours hour(s) × '
                             'S\$${equipment.hourlyRate.toStringAsFixed(2)}',
@@ -211,7 +231,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
                 const SizedBox(height: 24),
 
-                // Continue Button
+                // CONTINUE TO SUMMARY BUTTON
                 SizedBox(
                   height: 54,
                   child: ElevatedButton(
@@ -230,6 +250,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       );
                     }
                         : null,
+
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       foregroundColor: Colors.white,
@@ -237,6 +258,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         borderRadius: BorderRadius.circular(14),
                       ),
                     ),
+
                     child: const Text(
                       'Continue to Summary',
                       style: TextStyle(

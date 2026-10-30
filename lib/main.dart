@@ -13,12 +13,14 @@ class WorkshopManagerApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Workshop Equipment Manager',
+
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF246BFD),
         ),
       ),
+
       home: const CatalogScreen(),
     );
   }

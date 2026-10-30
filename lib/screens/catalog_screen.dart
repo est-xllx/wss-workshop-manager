@@ -80,7 +80,7 @@ class CatalogScreen extends StatelessWidget {
                 (equipment) => EquipmentCard(
               equipment: equipment,
 
-              // Open the selected equipment's detail screen
+              // Navigate to Equipment Details
               onTap: () {
                 Navigator.push(
                   context,
