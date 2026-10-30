@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../models/equipment_item.dart';
 import '../widgets/equipment_card.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_dimensions.dart';
+import '../utils/app_styles.dart';
 
 class CatalogScreen extends StatelessWidget {
   const CatalogScreen({super.key});
@@ -12,28 +15,24 @@ class CatalogScreen extends StatelessWidget {
         equipmentList.where((item) => item.isAvailable).length;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F8FA),
-
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('Workshop Equipment'),
-        backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF1E2022),
-        elevation: 0,
+        title: const Text(
+          'Workshop Equipment',
+          style: AppStyles.pageTitle,
+        ),
+        backgroundColor: AppColors.card,
       ),
-
       body: ListView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(AppDimensions.lg),
         children: [
           Container(
-            padding: const EdgeInsets.all(22),
+            padding: const EdgeInsets.all(AppDimensions.lg),
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [
-                  Color(0xFF246BFD),
-                  Color(0xFF5E93FF),
-                ],
+              gradient: AppColors.headerGradient,
+              borderRadius: BorderRadius.circular(
+                AppDimensions.bannerRadius,
               ),
-              borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,20 +42,12 @@ class CatalogScreen extends StatelessWidget {
                   color: Colors.white,
                   size: 32,
                 ),
-
-                const SizedBox(height: 12),
-
+                const SizedBox(height: AppDimensions.md),
                 const Text(
                   'Equipment Catalog',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppStyles.bannerTitle,
                 ),
-
-                const SizedBox(height: 6),
-
+                const SizedBox(height: AppDimensions.sm),
                 Text(
                   '$availableCount of ${equipmentList.length} '
                       'equipment available',
@@ -68,19 +59,12 @@ class CatalogScreen extends StatelessWidget {
               ],
             ),
           ),
-
-          const SizedBox(height: 24),
-
+          const SizedBox(height: AppDimensions.lg),
           const Text(
             'Available Equipment',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: AppStyles.sectionTitle,
           ),
-
-          const SizedBox(height: 14),
-
+          const SizedBox(height: AppDimensions.md),
           ...equipmentList.map(
                 (equipment) => EquipmentCard(
               equipment: equipment,
