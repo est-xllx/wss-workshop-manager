@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import '../models/equipment_item.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_dimensions.dart';
+import '../utils/app_styles.dart';
+import 'custom_badge.dart';
 
 class EquipmentCard extends StatelessWidget {
   final EquipmentItem equipment;
@@ -13,104 +17,73 @@ class EquipmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final available = equipment.isAvailable;
-
     return Card(
-      color: Colors.white,
+      color: AppColors.card,
       elevation: 2,
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(
+        bottom: AppDimensions.md,
+      ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(
+          AppDimensions.cardRadius,
+        ),
       ),
       child: InkWell(
-        onTap: available ? onTap : null,
-        borderRadius: BorderRadius.circular(16),
+        onTap: equipment.isAvailable ? onTap : null,
+        borderRadius: BorderRadius.circular(
+          AppDimensions.cardRadius,
+        ),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppDimensions.md),
           child: Row(
             children: [
               Container(
-                width: 60,
-                height: 60,
+                width: AppDimensions.cardIconBox,
+                height: AppDimensions.cardIconBox,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEAF1FF),
+                  color: AppColors.primary.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Icon(
                   equipment.icon,
-                  size: 30,
-                  color: const Color(0xFF246BFD),
+                  size: AppDimensions.iconSize,
+                  color: AppColors.primary,
                 ),
               ),
-
-              const SizedBox(width: 14),
-
+              const SizedBox(width: AppDimensions.md),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       equipment.name,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: AppStyles.cardTitle,
                     ),
-
-                    const SizedBox(height: 4),
-
+                    const SizedBox(height: AppDimensions.xs),
                     Text(
                       equipment.category,
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 13,
-                      ),
+                      style: AppStyles.subtitle,
                     ),
-
-                    const SizedBox(height: 6),
-
+                    const SizedBox(height: AppDimensions.sm),
                     Text(
                       'S\$${equipment.hourlyRate.toStringAsFixed(2)}/hr',
-                      style: const TextStyle(
-                        color: Color(0xFF246BFD),
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: AppStyles.price,
                     ),
                   ],
                 ),
               ),
-
+              const SizedBox(width: AppDimensions.sm),
               Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: available
-                          ? const Color(0xFFE2F8ED)
-                          : const Color(0xFFFFE8E8),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      available ? 'Available' : 'In Use',
-                      style: TextStyle(
-                        color: available
-                            ? const Color(0xFF16834A)
-                            : const Color(0xFFD64545),
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                  CustomBadge(
+                    isAvailable: equipment.isAvailable,
                   ),
-
-                  const SizedBox(height: 8),
-
+                  const SizedBox(height: AppDimensions.sm),
                   Icon(
                     Icons.chevron_right,
-                    color: available
-                        ? Colors.grey
+                    color: equipment.isAvailable
+                        ? AppColors.textMuted
                         : Colors.grey.shade300,
                   ),
                 ],
