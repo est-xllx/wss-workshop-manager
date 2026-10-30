@@ -1,29 +1,79 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:wss_workshop_manager/main.dart';
+import 'package:wss_workshop_manager/widgets/counter_stepper.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const WorkshopManagerApp());
+  testWidgets('Workshop Equipment Manager loads successfully',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(const WorkshopManagerApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+        expect(find.text('Workshop Equipment'), findsOneWidget);
+        expect(find.text('Equipment Catalog'), findsOneWidget);
+      });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  testWidgets('Rental duration counter increases when plus is pressed',
+          (WidgetTester tester) async {
+        int rentalHours = 1;
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: StatefulBuilder(
+                builder: (context, setState) {
+                  return CounterStepper(
+                    value: rentalHours,
+                    onChanged: (newValue) {
+                      setState(() {
+                        rentalHours = newValue;
+                      });
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('1'), findsOneWidget);
+
+        await tester.tap(find.byIcon(Icons.add));
+        await tester.pump();
+
+        expect(rentalHours, 2);
+        expect(find.text('2'), findsOneWidget);
+      });
+
+  testWidgets('Rental duration cannot go below minimum',
+          (WidgetTester tester) async {
+        int rentalHours = 1;
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: StatefulBuilder(
+                builder: (context, setState) {
+                  return CounterStepper(
+                    value: rentalHours,
+                    onChanged: (newValue) {
+                      setState(() {
+                        rentalHours = newValue;
+                      });
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('1'), findsOneWidget);
+
+        await tester.tap(find.byIcon(Icons.remove));
+        await tester.pump();
+
+        expect(rentalHours, 1);
+        expect(find.text('1'), findsOneWidget);
+      });
 }
